@@ -2,6 +2,12 @@ import { spawnSync } from "child_process";
 import os from "os";
 import fs from "fs";
 
+// Skip Husky setup in CI environments (e.g. Vercel, GitHub Actions)
+if (process.env.CI) {
+  console.log("CI environment detected — skipping Husky setup.");
+  process.exit(0);
+}
+
 // Function to run commands depending on the OS
 const runCommand = (command, args) => {
   const isWindows = os.platform() === "win32";
